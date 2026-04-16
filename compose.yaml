@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: ./app
+      # The Dockerfile uses ARG NEXT_OUTPUT. If you want to build a static export,
+      # you can uncomment the following line and set the value to 'export'.
+      # args:
+      #   NEXT_OUTPUT: export
+    ports:
+      - mode: ingress
+        target: 3000
+        published: 3000
+    # If NEXT_OUTPUT was set to 'export' during build, you might want to serve
+    # static files using x-defang-static-files.
+    # x-defang-static-files: /static
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 512M
